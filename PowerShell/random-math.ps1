@@ -1,5 +1,6 @@
-﻿$max = Read-Host -Prompt "Enter the range: "
-$total = Read-Host -Prompt "Enter total: "
+﻿[int]$max = Read-Host -Prompt "Enter the upper limit of the exercises "
+[int]$total = Read-Host -Prompt "Enter total number of the questions "
+[int]$chance = Read-Host -Prompt "Enter the chance of the showups of the upper limit (1 and above, larger number lower chance) "
 
 $filename = "Addition_${max}_total_${total}.txt"
 $i = 1
@@ -8,10 +9,10 @@ $null | Out-File $filename -Force
 
 While ($i -le $total) {
 
-    $chance = Get-Random -Maximum 5 -Minimum 1
+    $chance_random = Get-Random -Maximum ($chance+1) -Minimum 1
 
-    Switch ($chance) {
-        4 {
+    Switch ($chance_random) {
+        $chance {
             while ($true) {
                 $num1 = Get-Random -Maximum $max -Minimum 1
                 $num2 = Get-Random -Maximum $max -Minimum 1
